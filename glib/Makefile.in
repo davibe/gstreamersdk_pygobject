@@ -34,7 +34,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@PLATFORM_WIN32_TRUE@am__append_1 = -no-undefined
+@PLATFORM_WIN32_TRUE@am__append_1 = -no-undefined $(PYTHON_LIBS)
 @PLATFORM_WIN32_TRUE@am__append_2 = -DPLATFORM_WIN32
 subdir = glib
 DIST_COMMON = $(pkginclude_HEADERS) $(pyglib_PYTHON) \
@@ -305,6 +305,8 @@ pyglib_PYTHON = \
 pyglib_LTLIBRARIES = _glib.la
 common_ldflags = -module -avoid-version $(am__append_1)
 libpyglib_2_0_@PYTHON_BASENAME@_la_CFLAGS = $(GLIB_CFLAGS)
+@PLATFORM_WIN32_TRUE@libpyglib_2_0_@PYTHON_BASENAME@_la_LDFLAGS = $(common_ldflags)
+@PLATFORM_WIN32_FALSE@libpyglib_2_0_@PYTHON_BASENAME@_la_LDFLAGS = 
 libpyglib_2_0_@PYTHON_BASENAME@_la_LIBADD = $(GLIB_LIBS) $(FFI_LIBS)
 libpyglib_2_0_@PYTHON_BASENAME@_la_SOURCES = \
 	pyglib.c		\
@@ -431,7 +433,7 @@ clean-pyglibLTLIBRARIES:
 _glib.la: $(_glib_la_OBJECTS) $(_glib_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(_glib_la_LINK) -rpath $(pyglibdir) $(_glib_la_OBJECTS) $(_glib_la_LIBADD) $(LIBS)
 libpyglib-2.0-@PYTHON_BASENAME@.la: $(libpyglib_2_0_@PYTHON_BASENAME@_la_OBJECTS) $(libpyglib_2_0_@PYTHON_BASENAME@_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(libpyglib_2_0_@PYTHON_BASENAME@_la_LINK) -rpath $(libdir) $(libpyglib_2_0_@PYTHON_BASENAME@_la_OBJECTS) $(libpyglib_2_0_@PYTHON_BASENAME@_la_LIBADD) $(LIBS)
+	$(AM_V_CCLD)$(libpyglib_2_0_@PYTHON_BASENAME@_la_LINK) -rpath $(libdir) $(libpyglib_2_0_@PYTHON_BASENAME@_la_OBJECTS) $(libpyglib_2_0_@PYTHON_BASENAME@_la_LIBADD) $(libpyglib_2_0_@PYTHON_BASENAME@_la_LDFLAGS) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
