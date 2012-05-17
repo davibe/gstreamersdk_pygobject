@@ -7,7 +7,11 @@ if ENABLE_INTROSPECTION
 SUBDIRS += gi
 endif
 
+if PLATFORM_WIN32
+SUBDIRS +=
+else
 SUBDIRS += tests
+endif
 
 PLATFORM_VERSION = 2.0
 

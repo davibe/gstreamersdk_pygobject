@@ -16,7 +16,7 @@ pygobject_LTLIBRARIES = _gobject.la
 
 common_ldflags = -module -avoid-version
 if PLATFORM_WIN32
-common_ldflags += -no-undefined
+common_ldflags += -no-undefined $(PYTHON_LIBS)
 endif
 
 _gobject_la_CFLAGS = \

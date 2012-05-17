@@ -27,7 +27,7 @@ pygio_PYTHON = 	__init__.py
 # linker flags
 common_ldflags = -module -avoid-version
 if PLATFORM_WIN32
-common_ldflags += -no-undefined
+common_ldflags += -no-undefined $(PYTHON_LIBS)
 endif
 
 CLEANFILES =
