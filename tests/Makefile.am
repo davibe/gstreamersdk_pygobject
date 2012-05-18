@@ -100,6 +100,7 @@ TEST_FILES_GI = \
 	test_gi.py \
 	test_gdbus.py \
 	test_overrides.py
+DEPS_GI = Regress-1.0.typelib GIMarshallingTests-1.0.typelib gschemas.compiled
 endif
 
 EXTRA_DIST = \
@@ -126,7 +127,7 @@ RUN_TESTS_ENV_VARS= \
 RUN_TESTS_LAUNCH=$(RUN_TESTS_ENV_VARS) $(DBUS_LAUNCH) $(EXEC_NAME) $(PYTHON) $(srcdir)/runtests.py
 
 # run tests in separately to avoid loading static and introspection bindings in the same process
-check-local: $(LTLIBRARIES:.la=.so) Regress-1.0.typelib GIMarshallingTests-1.0.typelib gschemas.compiled
+check-local: $(LTLIBRARIES:.la=.so) $(DEPS_GI)
 	TEST_FILES="$(TEST_FILES_STATIC)" $(RUN_TESTS_LAUNCH)
 	TEST_FILES="$(TEST_FILES_GI)" $(RUN_TESTS_LAUNCH)
 if BUILD_GIO

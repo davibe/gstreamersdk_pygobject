@@ -313,6 +313,7 @@ TEST_FILES_STATIC = \
 @ENABLE_INTROSPECTION_TRUE@	test_gi.py \
 @ENABLE_INTROSPECTION_TRUE@	test_gdbus.py \
 @ENABLE_INTROSPECTION_TRUE@	test_overrides.py
+@ENABLE_INTROSPECTION_TRUE@ DEPS_GI = Regress-1.0.typelib GIMarshallingTests-1.0.typelib gschemas.compiled
 
 EXTRA_DIST = compathelper.py runtests.py testmodule.py test-floating.h \
 	test-thread.h test-unknown.h org.gnome.test.gschema.xml \
@@ -712,7 +713,7 @@ clean-local:
 	rm -f $(LTLIBRARIES:.la=.so) file.txt~
 
 # run tests in separately to avoid loading static and introspection bindings in the same process
-check-local: $(LTLIBRARIES:.la=.so) Regress-1.0.typelib GIMarshallingTests-1.0.typelib gschemas.compiled
+check-local: $(LTLIBRARIES:.la=.so) $(DEPS_GI)
 	TEST_FILES="$(TEST_FILES_STATIC)" $(RUN_TESTS_LAUNCH)
 	TEST_FILES="$(TEST_FILES_GI)" $(RUN_TESTS_LAUNCH)
 @BUILD_GIO_TRUE@	TEST_FILES="$(TEST_FILES_GIO)" $(RUN_TESTS_LAUNCH)
