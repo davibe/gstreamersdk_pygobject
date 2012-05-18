@@ -20,11 +20,7 @@ common_ldflags += -no-undefined $(PYTHON_LIBS)
 endif
 
 libpyglib_2_0_@PYTHON_BASENAME@_la_CFLAGS = $(GLIB_CFLAGS)
-if PLATFORM_WIN32
 libpyglib_2_0_@PYTHON_BASENAME@_la_LDFLAGS = $(common_ldflags)
-else
-libpyglib_2_0_@PYTHON_BASENAME@_la_LDFLAGS =
-endif
 libpyglib_2_0_@PYTHON_BASENAME@_la_LIBADD = $(GLIB_LIBS) $(FFI_LIBS)
 libpyglib_2_0_@PYTHON_BASENAME@_la_SOURCES = 	\
 	pyglib.c		\
