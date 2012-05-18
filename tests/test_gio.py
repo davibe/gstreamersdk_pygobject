@@ -652,7 +652,6 @@ class TestInputStream(unittest.TestCase):
 
     def testReadAsync(self):
         def callback(stream, result):
-            self.assertEquals(result.get_op_res_gssize(), 7)
             try:
                 data = stream.read_finish(result)
                 self.assertEquals(data, "testing")
@@ -824,7 +823,6 @@ class TestOutputStream(unittest.TestCase):
 
     def testWriteAsync(self):
         def callback(stream, result):
-            self.assertEquals(result.get_op_res_gssize(), 7)
             try:
                 self.assertEquals(stream.write_finish(result), 7)
                 self.failUnless(os.path.exists("outputstream.txt"))
