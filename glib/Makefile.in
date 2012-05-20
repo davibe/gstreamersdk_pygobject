@@ -98,7 +98,7 @@ libpyglib_2_0_@PYTHON_BASENAME@_la_OBJECTS =  \
 libpyglib_2_0_@PYTHON_BASENAME@_la_LINK = $(LIBTOOL) $(AM_V_lt) \
 	--tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link \
 	$(CCLD) $(libpyglib_2_0_@PYTHON_BASENAME@_la_CFLAGS) $(CFLAGS) \
-	$(libpyglib_2_0_@PYTHON_BASENAME@_la_LDFLAGS) $(LDFLAGS) -o $@
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -225,7 +225,6 @@ PYTHON = @PYTHON@
 PYTHON_BASENAME = @PYTHON_BASENAME@
 PYTHON_EXEC_PREFIX = @PYTHON_EXEC_PREFIX@
 PYTHON_INCLUDES = @PYTHON_INCLUDES@
-PYTHON_LIBS = @PYTHON_LIBS@
 PYTHON_PLATFORM = @PYTHON_PLATFORM@
 PYTHON_PREFIX = @PYTHON_PREFIX@
 PYTHON_VERSION = @PYTHON_VERSION@
@@ -306,7 +305,8 @@ pyglib_PYTHON = \
 pyglib_LTLIBRARIES = _glib.la
 common_ldflags = -module -avoid-version $(am__append_1)
 libpyglib_2_0_@PYTHON_BASENAME@_la_CFLAGS = $(GLIB_CFLAGS)
-libpyglib_2_0_@PYTHON_BASENAME@_la_LDFLAGS = $(common_ldflags)
+@PLATFORM_WIN32_TRUE@libpyglib_2_0_@PYTHON_BASENAME@_la_LDFLAGS = $(common_ldflags)
+@PLATFORM_WIN32_FALSE@libpyglib_2_0_@PYTHON_BASENAME@_la_LDFLAGS = 
 libpyglib_2_0_@PYTHON_BASENAME@_la_LIBADD = $(GLIB_LIBS) $(FFI_LIBS)
 libpyglib_2_0_@PYTHON_BASENAME@_la_SOURCES = \
 	pyglib.c		\
@@ -433,7 +433,7 @@ clean-pyglibLTLIBRARIES:
 _glib.la: $(_glib_la_OBJECTS) $(_glib_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(_glib_la_LINK) -rpath $(pyglibdir) $(_glib_la_OBJECTS) $(_glib_la_LIBADD) $(LIBS)
 libpyglib-2.0-@PYTHON_BASENAME@.la: $(libpyglib_2_0_@PYTHON_BASENAME@_la_OBJECTS) $(libpyglib_2_0_@PYTHON_BASENAME@_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(libpyglib_2_0_@PYTHON_BASENAME@_la_LINK) -rpath $(libdir) $(libpyglib_2_0_@PYTHON_BASENAME@_la_OBJECTS) $(libpyglib_2_0_@PYTHON_BASENAME@_la_LIBADD) $(LIBS)
+	$(AM_V_CCLD)$(libpyglib_2_0_@PYTHON_BASENAME@_la_LINK) -rpath $(libdir) $(libpyglib_2_0_@PYTHON_BASENAME@_la_OBJECTS) $(libpyglib_2_0_@PYTHON_BASENAME@_la_LIBADD) $(libpyglib_2_0_@PYTHON_BASENAME@_la_LDFLAGS) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
