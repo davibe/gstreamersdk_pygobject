@@ -137,6 +137,9 @@ _pygi_info_new (GIBaseInfo *info)
         case GI_INFO_TYPE_INVALID:
             PyErr_SetString (PyExc_RuntimeError, "Invalid info type");
             return NULL;
+        case GI_INFO_TYPE_INVALID_0:
+            PyErr_SetString (PyExc_RuntimeError, "Invalid info type");
+            return NULL;
         case GI_INFO_TYPE_FUNCTION:
             type = &PyGIFunctionInfo_Type;
             break;
@@ -161,9 +164,6 @@ _pygi_info_new (GIBaseInfo *info)
             break;
         case GI_INFO_TYPE_CONSTANT:
             type = &PyGIConstantInfo_Type;
-            break;
-        case GI_INFO_TYPE_ERROR_DOMAIN:
-            type = &PyGIErrorDomainInfo_Type;
             break;
         case GI_INFO_TYPE_UNION:
             type = &PyGIUnionInfo_Type;
@@ -479,9 +479,9 @@ _pygi_g_type_info_size (GITypeInfo *type_info)
                     break;
                 case GI_INFO_TYPE_VFUNC:
                 case GI_INFO_TYPE_INVALID:
+                case GI_INFO_TYPE_INVALID_0:
                 case GI_INFO_TYPE_FUNCTION:
                 case GI_INFO_TYPE_CONSTANT:
-                case GI_INFO_TYPE_ERROR_DOMAIN:
                 case GI_INFO_TYPE_VALUE:
                 case GI_INFO_TYPE_SIGNAL:
                 case GI_INFO_TYPE_PROPERTY:
@@ -858,9 +858,9 @@ pygi_g_struct_info_is_simple (GIStructInfo *struct_info)
                         break;
                     case GI_INFO_TYPE_VFUNC:
                     case GI_INFO_TYPE_INVALID:
+                    case GI_INFO_TYPE_INVALID_0:
                     case GI_INFO_TYPE_FUNCTION:
                     case GI_INFO_TYPE_CONSTANT:
-                    case GI_INFO_TYPE_ERROR_DOMAIN:
                     case GI_INFO_TYPE_VALUE:
                     case GI_INFO_TYPE_SIGNAL:
                     case GI_INFO_TYPE_PROPERTY:
